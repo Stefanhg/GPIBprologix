@@ -18,7 +18,6 @@ class GPIBprologix():
 	def read(self):
 		GPIBcom.write(b"++read eoi\n")
 		data = GPIBcom.readline()
-		print(data)
 		return(data.decode('utf-8').rstrip())
 
 	def query(self, data):

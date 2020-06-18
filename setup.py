@@ -6,5 +6,5 @@ url='#',
 author='Decee1',
 author_email='n.a',
 license='',
-packages=['GPIBPrologix'],
+packages=['GPIBprologix'],
 zip_safe=False)

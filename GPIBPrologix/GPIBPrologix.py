@@ -1,6 +1,7 @@
 import serial
 import sys
 
+# Global variable used to store which GPIB is under control currently
 currentGPIB = None
 
 class ResourceManager():
@@ -8,8 +9,6 @@ class ResourceManager():
 	
 	def __init__(self, comport, serialBaud=115200, serialTimeout=1, serialParity='N'):
 		global GPIBcom
-		
-
 		try:
 			GPIBcom = serial.Serial(comport, baudrate=serialBaud, bytesize=8, parity=serialParity, stopbits=1, timeout=serialTimeout, xonxoff=0, rtscts=0)
 		except serial.SerialException:
@@ -18,10 +17,10 @@ class ResourceManager():
 
 	class open_resource():
 		resourceAddress = None
-		
+
+		# Sends address to USB-GPIB adapter
 		def selectAddress(self, address):
 			global currentGPIB
-			# Sends address to USB-GPIB adapter
 			GPIBcom.write(("++addr " + str(address) + "\n").encode())
 			currentGPIB = address
 

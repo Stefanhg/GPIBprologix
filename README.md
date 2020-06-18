@@ -6,9 +6,9 @@ Very simple GPIB driver for Prologix USB-GPIB adapter
 <br>Supports multiple GPIB instruments on a single USB-GPIB adapter. 
 
 <br><b>Installertion:</b>
-<br>Clone git
-<br>Put folder somewhere on computer
-<br>Open terminal and navigate into folder
-<br>Type in "pip install ." 
-<br>Wait until installertion is done
-<br>The package is now installed!
+<br>- Clone git
+<br>-Put folder somewhere on computer
+<br>- Open terminal and navigate into folder
+<br>- Type in "pip install ." 
+<br>- Wait until installertion is done
+<br>- The package is now installed!

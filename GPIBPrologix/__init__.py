@@ -1,0 +1,1 @@
+from .GPIBPrologix import ResourceManager

@@ -1,6 +1,6 @@
-import GPIB_Prologix
+import GPIBPrologix
 # 
-GPIB = GPIB_Prologix.ResourceManager("COM45")
+GPIB = GPIBPrologix.ResourceManager("COM45")
 
 # Creates a path to use GPIB 1 and GPIB 2 
 inst1 = GPIB.open_resource(1)

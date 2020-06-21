@@ -6,19 +6,24 @@ currentGPIB = None
 
 class ResourceManager():
 	GPIBcom = None
-	
-	def __init__(self, comport, serialBaud=115200, serialTimeout=1, serialParity='N'):
+	readTimeout = None
+
+	def __init__(self, comport, readTimeout=1000, serialBaud=115200, serialTimeout=1):
 		global GPIBcom
 		try:
-			GPIBcom = serial.Serial(comport, baudrate=serialBaud, bytesize=8, parity=serialParity, stopbits=1, timeout=serialTimeout, xonxoff=0, rtscts=0)
+			GPIBcom = serial.Serial(comport, baudrate=serialBaud, timeout=serialTimeout )
+			GPIBcom.write(("++read_tmo_ms " + str(readTimeout) + "\n").encode())
 		except serial.SerialException:
 			print("Cannot connect to Serial port. Port already in use")
 			sys.exit(1)
 
+	def close(self):
+		GPIBcom.close()
+		
 	class open_resource():
+		# This address is the instance's address
 		resourceAddress = None
 
-		# Sends address to USB-GPIB adapter
 		def selectAddress(self, address):
 			global currentGPIB
 			GPIBcom.write(("++addr " + str(address) + "\n").encode())
@@ -27,19 +32,18 @@ class ResourceManager():
 		def __init__(self, address):
 			self.resourceAddress = address
 			self.selectAddress(address)
-		
+
 		def write(self, data):
 			if(currentGPIB != self.resourceAddress):
 				self.selectAddress(self.resourceAddress)
-			GPIBcom.write(str(data + "\n").encode())
-		
+			GPIBcom.write((data + "\n").encode())
+
 		def read(self):
 			GPIBcom.write(b"++read eoi\n")
-			data = GPIBcom.readline()
-			return(data.decode('utf-8').rstrip())
+			data = GPIBcom.readline().decode('utf-8').rstrip()
+			return(data)
 
 		def query(self, data):
 			self.write(data)
 			data = self.read()
 			return(data)
-	

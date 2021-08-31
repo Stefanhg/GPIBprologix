@@ -12,3 +12,12 @@ Very simple GPIB driver for Prologix USB-GPIB adapter
 <br>- Type in "pip install ." 
 <br>- Wait until installertion is done
 <br>- The package is now installed!
+<br>
+<br>
+<br><b>Example:</b>
+```
+import GPIBPrologix
+GPIB = GPIBPrologix.ResourceManager("COM13")
+inst = GPIB.open_resource(2)
+print(inst.query("*IDN?"))
+```

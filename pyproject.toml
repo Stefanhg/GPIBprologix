@@ -1,0 +1,16 @@
+[project]
+name = "GPIBPrologix"
+description = "USB to GPIB Python driver"
+version="0.1.1"
+
+authors = [
+	{name = "Stefan", email = "xxx@yyy.com"}
+]
+dependencies = [
+	"pyserial",
+]
+
+[tool.setuptools.packages.find]
+include = [
+	"GPIBPrologix",
+]
